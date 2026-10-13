@@ -7,6 +7,6 @@
 - Guaranteed: latest value per key kept; order within a partition kept; offsets never change.
 - Not guaranteed: WHEN old values are removed; that a reader sees one value per key; active segment never compacted.
 - Defaults: segment.ms=7 days, segment.bytes=1 GB, min.cleanable.dirty.ratio=0.5, delete.retention.ms=24 h.
-- Evidence: 3 publications -> 120 readable messages, nothing removed. Forced compaction
-  (segment.ms=10000, min.cleanable.dirty.ratio=0.01, 4th publication): 160 offsets, 80 readable. Restored.
+- Evidence: fresh topic, 2 publications -> 80 readable messages, nothing removed. Forced compaction
+  (segment.ms=10000, min.cleanable.dirty.ratio=0.01, 3rd publication): 120 offsets, 80 readable. Restored.
 - Consequence for Spark (B3): keep only the highest offset per vehicle_id.
