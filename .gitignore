@@ -4,3 +4,6 @@ __MACOSX/
 checkpoints/
 data/
 *.log
+__pycache__/
+*.pyc
+sample.txt
