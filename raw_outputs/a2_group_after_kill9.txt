@@ -1,0 +1,5 @@
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          1          32              32              0               rdkafka-4379afc8-dab6-486c-afeb-efddce744f8d /192.168.65.1   rdkafka
+alerts-notifier alerts          2          27              27              0               rdkafka-4379afc8-dab6-486c-afeb-efddce744f8d /192.168.65.1   rdkafka
+alerts-notifier alerts          0          20              32              12              rdkafka-7807aeee-9438-45a3-8bf4-0b071b6ea446 /192.168.65.1   rdkafka

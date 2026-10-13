@@ -1,0 +1,170 @@
+[08:31:39] [B] started, waiting for partitions...
+[08:31:42] [B] ASSIGNED +[] -> owns []
+[08:31:45] [B] ASSIGNED +[0] -> owns [0]
+[08:33:01] [B] p0 o3 SPEEDING vehicle=V0039 details={'speed_kmh': 121.3}
+[08:33:03] [B] p0 o4 SPEEDING vehicle=V0012 details={'speed_kmh': 129.4}
+[08:33:04] [B] p0 o5 SPEEDING vehicle=V0012 details={'speed_kmh': 135.3}
+[08:33:04] [B] p0 o6 DUPLICATE TEST-1791880380-10:speeding skipped
+[08:33:06] [B] p0 o7 SPEEDING vehicle=V0002 details={'speed_kmh': 122.9}
+[08:33:07] [B] p0 o8 SPEEDING vehicle=V0025 details={'speed_kmh': 131.5}
+[08:33:07] [B] p0 o9 SPEEDING vehicle=V0025 details={'speed_kmh': 123.0}
+[08:33:09] [B] started, waiting for partitions...
+[08:33:09] [B] ASSIGNED +[0] -> owns [0]
+[08:33:09] [B] p0 o10 SPEEDING vehicle=V0040 details={'speed_kmh': 139.1}
+[08:33:09] [B] p0 o11 SPEEDING vehicle=V0025 details={'speed_kmh': 134.4}
+[08:33:10] [B] p0 o12 SPEEDING vehicle=V0025 details={'speed_kmh': 124.6}
+[08:33:14] [B] p0 o13 SPEEDING vehicle=V0006 details={'speed_kmh': 123.0}
+[08:33:16] [B] p0 o14 SPEEDING vehicle=V0019 details={'speed_kmh': 132.6}
+[08:33:16] [B] p0 o15 SPEEDING vehicle=V0029 details={'speed_kmh': 129.6}
+[08:33:18] [B] p0 o16 SPEEDING vehicle=V0017 details={'speed_kmh': 127.0}
+[08:33:20] [B] p0 o17 SPEEDING vehicle=V0029 details={'speed_kmh': 134.3}
+[08:33:24] [B] p0 o18 SPEEDING vehicle=V0012 details={'speed_kmh': 133.2}
+[08:33:25] [B] p0 o19 SPEEDING vehicle=V0034 details={'speed_kmh': 138.2}
+[08:35:49] [B] started, waiting for partitions...
+[08:35:52] [B] ASSIGNED +[0, 1, 2] -> owns [0, 1, 2]
+[08:35:52] [B] p0 o118 SPEEDING vehicle=V0019 details={'speed_kmh': 128.9}
+[08:35:52] [B] p0 o119 SPEEDING vehicle=V0012 details={'speed_kmh': 129.8}
+[08:35:52] [B] p1 o94 SPEEDING vehicle=V0032 details={'speed_kmh': 121.8}
+[08:35:52] [B] p2 o111 SPEEDING vehicle=V0009 details={'speed_kmh': 137.3}
+[08:35:52] [B] p2 o112 DUPLICATE TEST-1791880380-290:speeding skipped
+[08:35:52] [B] p2 o113 SPEEDING vehicle=V0001 details={'speed_kmh': 124.2}
+[08:35:52] [B] p2 o114 SPEEDING vehicle=V0015 details={'speed_kmh': 134.5}
+[08:35:54] [B] p2 o115 SPEEDING vehicle=V0026 details={'speed_kmh': 134.5}
+[08:35:54] [B] p2 o116 SPEEDING vehicle=V0005 details={'speed_kmh': 122.3}
+[08:35:55] [B] p1 o95 SPEEDING vehicle=V0003 details={'speed_kmh': 131.0}
+[08:35:55] [B] p2 o117 SPEEDING vehicle=V0024 details={'speed_kmh': 126.6}
+[08:35:56] [B] p0 o120 SPEEDING vehicle=V0039 details={'speed_kmh': 137.3}
+[08:35:56] [B] p0 o121 SPEEDING vehicle=V0025 details={'speed_kmh': 133.7}
+[08:35:57] [B] p0 o122 SPEEDING vehicle=V0031 details={'speed_kmh': 130.6}
+[08:35:57] [B] p2 o118 SPEEDING vehicle=V0038 details={'speed_kmh': 136.7}
+[08:35:58] [B] p2 o119 SPEEDING vehicle=V0011 details={'speed_kmh': 134.8}
+[08:35:58] [B] p2 o120 SPEEDING vehicle=V0005 details={'speed_kmh': 122.1}
+[08:35:58] [B] p2 o121 DUPLICATE TEST-1791880554-10:speeding skipped
+[08:35:59] [B] p0 o123 SPEEDING vehicle=V0027 details={'speed_kmh': 130.0}
+[08:35:59] [B] p1 o96 SPEEDING vehicle=V0028 details={'speed_kmh': 127.5}
+[08:36:00] [B] p1 o97 SPEEDING vehicle=V0028 details={'speed_kmh': 129.3}
+[08:36:00] [B] p1 o98 SPEEDING vehicle=V0022 details={'speed_kmh': 138.7}
+[08:36:01] [B] p0 o124 SPEEDING vehicle=V0029 details={'speed_kmh': 131.9}
+[08:36:01] [B] p2 o122 SPEEDING vehicle=V0020 details={'speed_kmh': 122.4}
+[08:36:02] [B] p2 o123 SPEEDING vehicle=V0004 details={'speed_kmh': 124.8}
+[08:36:02] [B] p0 o125 SPEEDING vehicle=V0037 details={'speed_kmh': 122.6}
+[08:36:03] [B] p2 o124 SPEEDING vehicle=V0008 details={'speed_kmh': 134.8}
+[08:36:03] [B] p1 o99 SPEEDING vehicle=V0018 details={'speed_kmh': 134.8}
+[08:36:03] [B] p1 o100 DUPLICATE TEST-1791880554-20:speeding skipped
+[08:36:04] [B] p1 o101 SPEEDING vehicle=V0021 details={'speed_kmh': 126.9}
+[08:36:04] [B] p1 o102 SPEEDING vehicle=V0032 details={'speed_kmh': 122.6}
+[08:36:05] [B] p2 o125 SPEEDING vehicle=V0023 details={'speed_kmh': 135.4}
+[08:36:05] [B] p0 o126 SPEEDING vehicle=V0034 details={'speed_kmh': 123.3}
+[08:36:06] [B] p2 o126 SPEEDING vehicle=V0011 details={'speed_kmh': 138.5}
+[08:36:06] [B] p0 o127 SPEEDING vehicle=V0019 details={'speed_kmh': 126.6}
+[08:36:07] [B] p2 o127 SPEEDING vehicle=V0035 details={'speed_kmh': 132.8}
+[08:36:07] [B] p2 o128 SPEEDING vehicle=V0016 details={'speed_kmh': 128.4}
+[08:36:08] [B] p0 o128 SPEEDING vehicle=V0037 details={'speed_kmh': 136.1}
+[08:36:08] [B] p0 o129 SPEEDING vehicle=V0019 details={'speed_kmh': 129.9}
+[08:36:08] [B] p0 o130 DUPLICATE TEST-1791880554-30:speeding skipped
+[08:36:09] [B] p2 o129 SPEEDING vehicle=V0005 details={'speed_kmh': 128.8}
+[08:36:09] [B] p1 o103 SPEEDING vehicle=V0032 details={'speed_kmh': 129.5}
+[08:36:10] [B] p0 o131 SPEEDING vehicle=V0029 details={'speed_kmh': 129.4}
+[08:36:11] [B] p1 o104 SPEEDING vehicle=V0028 details={'speed_kmh': 132.6}
+[08:36:11] [B] p2 o130 SPEEDING vehicle=V0004 details={'speed_kmh': 135.4}
+[08:36:12] [B] p1 o105 SPEEDING vehicle=V0018 details={'speed_kmh': 123.6}
+[08:36:12] [B] p1 o106 SPEEDING vehicle=V0018 details={'speed_kmh': 125.6}
+[08:36:13] [B] p1 o107 SPEEDING vehicle=V0013 details={'speed_kmh': 122.6}
+[08:36:13] [B] p1 o108 SPEEDING vehicle=V0018 details={'speed_kmh': 134.9}
+[08:36:14] [B] p2 o131 SPEEDING vehicle=V0023 details={'speed_kmh': 134.5}
+[08:36:14] [B] p2 o132 DUPLICATE TEST-1791880554-40:speeding skipped
+[08:36:14] [B] p2 o133 SPEEDING vehicle=V0007 details={'speed_kmh': 121.4}
+[08:36:15] [B] p2 o134 SPEEDING vehicle=V0030 details={'speed_kmh': 132.0}
+[08:36:15] [B] p2 o135 SPEEDING vehicle=V0035 details={'speed_kmh': 138.6}
+[08:36:16] [B] p2 o136 SPEEDING vehicle=V0020 details={'speed_kmh': 128.6}
+[08:36:16] [B] p1 o109 SPEEDING vehicle=V0003 details={'speed_kmh': 121.5}
+[08:36:17] [B] p0 o132 SPEEDING vehicle=V0014 details={'speed_kmh': 132.0}
+[08:36:17] [B] p2 o137 SPEEDING vehicle=V0015 details={'speed_kmh': 121.6}
+[08:36:18] [B] p1 o110 SPEEDING vehicle=V0032 details={'speed_kmh': 124.0}
+[08:36:18] [B] p0 o133 SPEEDING vehicle=V0031 details={'speed_kmh': 137.3}
+[08:36:19] [B] p0 o134 SPEEDING vehicle=V0012 details={'speed_kmh': 123.2}
+[08:36:19] [B] p0 o135 DUPLICATE TEST-1791880554-50:speeding skipped
+[08:36:19] [B] p1 o111 SPEEDING vehicle=V0036 details={'speed_kmh': 127.5}
+[08:36:20] [B] p0 o136 SPEEDING vehicle=V0031 details={'speed_kmh': 123.7}
+[08:36:20] [B] p0 o137 SPEEDING vehicle=V0034 details={'speed_kmh': 139.6}
+[08:36:21] [B] p1 o112 SPEEDING vehicle=V0013 details={'speed_kmh': 130.6}
+[08:36:21] [B] p2 o138 SPEEDING vehicle=V0005 details={'speed_kmh': 123.7}
+[08:36:22] [B] p2 o139 SPEEDING vehicle=V0005 details={'speed_kmh': 129.2}
+[08:36:22] [B] p1 o113 SPEEDING vehicle=V0013 details={'speed_kmh': 127.4}
+[08:36:23] [B] p1 o114 SPEEDING vehicle=V0021 details={'speed_kmh': 128.1}
+[08:36:23] [B] p2 o140 SPEEDING vehicle=V0011 details={'speed_kmh': 123.0}
+[08:36:24] [B] p0 o138 SPEEDING vehicle=V0037 details={'speed_kmh': 121.8}
+[08:36:24] [B] p0 o139 DUPLICATE TEST-1791880554-60:speeding skipped
+[08:36:24] [B] p2 o141 SPEEDING vehicle=V0026 details={'speed_kmh': 126.8}
+[08:36:25] [B] p1 o115 SPEEDING vehicle=V0032 details={'speed_kmh': 128.6}
+[08:36:25] [B] p1 o116 SPEEDING vehicle=V0036 details={'speed_kmh': 124.0}
+[08:36:26] [B] p0 o140 SPEEDING vehicle=V0017 details={'speed_kmh': 139.0}
+[08:36:26] [B] p2 o142 SPEEDING vehicle=V0009 details={'speed_kmh': 128.3}
+[08:36:27] [B] p0 o141 SPEEDING vehicle=V0037 details={'speed_kmh': 135.9}
+[08:36:27] [B] p2 o143 SPEEDING vehicle=V0001 details={'speed_kmh': 124.9}
+[08:36:28] [B] p0 o142 SPEEDING vehicle=V0006 details={'speed_kmh': 134.4}
+[08:36:28] [B] p1 o117 SPEEDING vehicle=V0036 details={'speed_kmh': 122.7}
+[08:36:29] [B] p1 o118 SPEEDING vehicle=V0033 details={'speed_kmh': 131.2}
+[08:36:29] [B] p1 o119 DUPLICATE TEST-1791880554-70:speeding skipped
+[08:36:29] [B] p2 o144 SPEEDING vehicle=V0038 details={'speed_kmh': 139.6}
+[08:36:30] [B] p0 o143 SPEEDING vehicle=V0002 details={'speed_kmh': 128.8}
+[08:36:30] [B] p1 o120 SPEEDING vehicle=V0033 details={'speed_kmh': 132.0}
+[08:36:31] [B] p1 o121 SPEEDING vehicle=V0032 details={'speed_kmh': 128.3}
+[08:36:31] [B] p2 o145 SPEEDING vehicle=V0016 details={'speed_kmh': 123.5}
+[08:36:32] [B] p0 o144 SPEEDING vehicle=V0025 details={'speed_kmh': 130.8}
+[08:36:32] [B] p2 o146 SPEEDING vehicle=V0023 details={'speed_kmh': 125.5}
+[08:36:33] [B] p0 o145 SPEEDING vehicle=V0014 details={'speed_kmh': 136.3}
+[08:36:33] [B] p0 o146 SPEEDING vehicle=V0019 details={'speed_kmh': 126.2}
+[08:36:34] [B] p2 o147 SPEEDING vehicle=V0023 details={'speed_kmh': 123.2}
+[08:36:34] [B] p2 o148 DUPLICATE TEST-1791880554-80:speeding skipped
+[08:36:34] [B] p2 o149 SPEEDING vehicle=V0009 details={'speed_kmh': 130.7}
+[08:36:35] [B] p0 o147 SPEEDING vehicle=V0039 details={'speed_kmh': 138.2}
+[08:36:35] [B] p2 o150 SPEEDING vehicle=V0008 details={'speed_kmh': 128.1}
+[08:36:36] [B] p1 o122 SPEEDING vehicle=V0028 details={'speed_kmh': 131.5}
+[08:36:36] [B] p2 o151 SPEEDING vehicle=V0038 details={'speed_kmh': 137.4}
+[08:36:37] [B] p0 o148 SPEEDING vehicle=V0039 details={'speed_kmh': 138.5}
+[08:36:37] [B] p2 o152 SPEEDING vehicle=V0015 details={'speed_kmh': 124.7}
+[08:36:38] [B] p0 o149 SPEEDING vehicle=V0012 details={'speed_kmh': 124.5}
+[08:36:38] [B] p2 o153 SPEEDING vehicle=V0024 details={'speed_kmh': 134.4}
+[08:36:39] [B] p0 o150 SPEEDING vehicle=V0012 details={'speed_kmh': 130.2}
+[08:36:39] [B] p0 o151 DUPLICATE TEST-1791880554-90:speeding skipped
+[08:36:39] [B] p0 o152 SPEEDING vehicle=V0014 details={'speed_kmh': 125.6}
+[08:36:40] [B] p0 o153 SPEEDING vehicle=V0027 details={'speed_kmh': 135.6}
+[08:36:40] [B] p0 o154 SPEEDING vehicle=V0002 details={'speed_kmh': 123.9}
+[08:36:41] [B] p1 o123 SPEEDING vehicle=V0028 details={'speed_kmh': 127.2}
+[08:36:41] [B] p0 o155 SPEEDING vehicle=V0010 details={'speed_kmh': 131.7}
+[08:36:42] [B] p2 o154 SPEEDING vehicle=V0005 details={'speed_kmh': 128.0}
+[08:36:42] [B] p1 o124 SPEEDING vehicle=V0022 details={'speed_kmh': 124.0}
+[08:36:43] [B] p1 o125 SPEEDING vehicle=V0028 details={'speed_kmh': 138.5}
+[08:36:43] [B] p0 o156 SPEEDING vehicle=V0010 details={'speed_kmh': 132.3}
+[08:36:44] [B] p1 o126 SPEEDING vehicle=V0036 details={'speed_kmh': 132.1}
+[08:36:44] [B] p1 o127 DUPLICATE TEST-1791880554-100:speeding skipped
+[08:36:44] [B] p2 o155 SPEEDING vehicle=V0016 details={'speed_kmh': 137.5}
+[08:36:45] [B] p2 o156 SPEEDING vehicle=V0008 details={'speed_kmh': 136.2}
+[08:36:45] [B] p2 o157 SPEEDING vehicle=V0015 details={'speed_kmh': 134.2}
+[08:36:46] [B] p2 o158 SPEEDING vehicle=V0011 details={'speed_kmh': 134.0}
+[08:36:46] [B] p2 o159 SPEEDING vehicle=V0011 details={'speed_kmh': 125.0}
+[08:36:47] [B] p2 o160 SPEEDING vehicle=V0020 details={'speed_kmh': 121.4}
+[08:36:47] [B] p0 o157 SPEEDING vehicle=V0006 details={'speed_kmh': 132.9}
+[08:36:48] [B] p0 o158 SPEEDING vehicle=V0012 details={'speed_kmh': 129.3}
+[08:36:48] [B] p1 o128 SPEEDING vehicle=V0036 details={'speed_kmh': 130.2}
+[08:36:49] [B] p0 o159 SPEEDING vehicle=V0012 details={'speed_kmh': 133.6}
+[08:36:49] [B] p0 o160 DUPLICATE TEST-1791880554-110:speeding skipped
+[08:36:49] [B] p2 o161 SPEEDING vehicle=V0007 details={'speed_kmh': 124.0}
+[08:36:50] [B] p2 o162 SPEEDING vehicle=V0024 details={'speed_kmh': 132.5}
+[08:36:50] [B] p0 o161 SPEEDING vehicle=V0017 details={'speed_kmh': 138.8}
+[08:36:51] [B] p0 o162 SPEEDING vehicle=V0002 details={'speed_kmh': 139.2}
+[08:36:51] [B] p0 o163 SPEEDING vehicle=V0012 details={'speed_kmh': 135.1}
+[08:36:52] [B] p2 o163 SPEEDING vehicle=V0004 details={'speed_kmh': 126.9}
+[08:36:52] [B] p2 o164 SPEEDING vehicle=V0026 details={'speed_kmh': 125.2}
+[08:36:53] [B] p2 o165 SPEEDING vehicle=V0020 details={'speed_kmh': 131.2}
+[08:36:53] [B] p2 o166 SPEEDING vehicle=V0026 details={'speed_kmh': 128.1}
+[08:36:54] [B] p2 o167 SPEEDING vehicle=V0024 details={'speed_kmh': 136.5}
+[08:36:54] [B] p2 o168 DUPLICATE TEST-1791880554-120:speeding skipped
+[08:36:57] [B] REVOKED  -[0, 1, 2] -> owns []
+[08:36:57] [B] closed
+[08:37:25] [B] started, waiting for partitions...
+[08:37:27] [B] ASSIGNED +[] -> owns []
+[08:37:30] [B] ASSIGNED +[0] -> owns [0]
+[08:39:01] [B] REVOKED  -[0] -> owns []
+[08:39:01] [B] closed

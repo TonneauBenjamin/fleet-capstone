@@ -6,3 +6,5 @@
 | 2026-10-13 | Benjamin | 0 | --hot-vehicle for ~2 min: partition 2 received 50% of traffic (expected 52%), 8x partition 1 | none (evidence for A3 and C3) |
 | 2026-10-13 | Benjamin | 1 | Catalog publisher (idempotent producer, 40 records, key=vehicle_id) | none |
 | 2026-10-13 | Benjamin | 1 | fresh topic: 2 publications = 80 messages, no compaction; forced compaction (3rd publication): 120 offsets, 80 readable | default segment.ms=7d → lowered temporarily, then restored |
+| 2026-10-13 | Benjamin | 2 | Test alert sender + alert format (docs/schemas.md) | none |
+| 2026-10-13 | Benjamin | 2 | Notifier, 2 instances: cooperative 2-round rebalance; clean stop handover < 1 s; kill -9 handover 48 s, resumed at committed offset, no loss | Ctrl+C killed `tee` → BrokenPipeError inside consumer.close() → log() helper + `tee -i` |
