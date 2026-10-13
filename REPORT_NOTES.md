@@ -29,3 +29,6 @@
 - Trade-off: lower session.timeout.ms = faster failover but false "dead" verdicts on slow consumers -> rebalance storms.
 - Bug found and fixed: Ctrl+C also killed `tee`, so print() raised BrokenPipeError inside consumer.close()
   (on_revoke prints) -> clean leave not guaranteed. Fix: log() ignores a closed output + `tee -i`.
+- Poison message: an alert with valid JSON but no alert_type used to crash the notifier BEFORE the commit,
+  so every restart re-read it and crashed again (one bad message blocks its partition forever).
+  Fix: alert_type read inside the try with a default; unreadable alerts are logged, committed and skipped.
