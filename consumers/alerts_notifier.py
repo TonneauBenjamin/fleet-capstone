@@ -84,7 +84,8 @@ def main():
             where = f"p{msg.partition()} o{msg.offset()}"
             try:
                 alert = json.loads(msg.value())
-                alert_id = alert["alert_id"]
+                alert_id = str(alert["alert_id"])
+                alert_type = str(alert.get("alert_type", "unknown"))
             except (ValueError, KeyError, TypeError):
                 log(f"[{now()}] [{name}] {where} unreadable alert, skipped")
                 consumer.commit(message=msg, asynchronous=False)
@@ -93,7 +94,7 @@ def main():
             if alert_id in seen:
                 log(f"[{now()}] [{name}] {where} DUPLICATE {alert_id} skipped")
             else:
-                log(f"[{now()}] [{name}] {where} {alert['alert_type'].upper()} "
+                log(f"[{now()}] [{name}] {where} {alert_type.upper()} "
                     f"vehicle={alert.get('vehicle_id')} details={alert.get('details')}")
                 seen[alert_id] = True
                 if len(seen) > SEEN_MAX:
