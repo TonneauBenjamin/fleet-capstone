@@ -8,3 +8,4 @@
 | 2026-10-13 | Benjamin | 1 | fresh topic: 2 publications = 80 messages, no compaction; forced compaction (3rd publication): 120 offsets, 80 readable | default segment.ms=7d → lowered temporarily, then restored |
 | 2026-10-13 | Benjamin | 2 | Test alert sender + alert format (docs/schemas.md) | none |
 | 2026-10-13 | Benjamin | 2 | Notifier, 2 instances: cooperative 2-round rebalance; clean stop handover < 1 s; kill -9 handover 48 s, resumed at committed offset, no loss | Ctrl+C killed `tee` → BrokenPipeError inside consumer.close() → log() helper + `tee -i` |
+| 2026-10-13 | Benjamin | 2 | Review: alert without alert_type crashed the notifier before commit → poison message blocking a partition | alert_type read inside the try with a default |
