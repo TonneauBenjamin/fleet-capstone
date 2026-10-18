@@ -72,7 +72,7 @@ changes hash(key) mod N, so a key moves to another partition and per-key order b
   `docker compose down`. Also KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0 (default 3000 ms): part of the
   6 s we measured for B to join the group in A2 was this initial delay; to re-measure with v2.
 - Steps 0-2 measurements were taken with v1; their conclusions (keys, compaction, rebalancing) are unchanged.
-\n
+
 ## A4 - Delivery semantics per hop
 | Hop | Semantics | Why |
 |---|---|---|
