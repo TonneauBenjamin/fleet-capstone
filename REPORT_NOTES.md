@@ -58,3 +58,17 @@ changes hash(key) mod N, so a key moves to another partition and per-key order b
   (an alert and its duplicate could reach different notifier instances); on fleet_catalog, compaction is impossible.
 - One partition: one Spark read task and one active consumer per group (extra instances stay idle as standbys),
   throughput limited to one partition on one broker; gain = total order across all vehicles.
+
+## Provided material v2 (starter kit, updated 2026-10-18)
+- The teacher's updated starter kit replaced the first version of the provided files. Changes that matter:
+  event_id now contains a run id (no false duplicates when the simulator restarts -- a problem we had
+  noticed in v1: seq restarted at 1, ~1/40 of reused ids collided); event_time always has millisecond
+  precision (pattern yyyy-MM-dd'T'HH:mm:ss.SSSXXX); anomalies = half speed > 120, half harsh braking;
+  sustained-speeding episodes (101-118 km/h for 6-9 min) are injected, so Query 3 can fire (with v1 a
+  vehicle's 5-min mean stayed ~54 km/h and could never exceed 100); missing field can be vehicle_id,
+  event_time or speed_kmh; --unknown-vehicles sends V0041-V0045 (not in the catalog -> UNKNOWN).
+- docker-compose v2: KAFKA_LOG_DIRS=/var/lib/kafka/data. In v1 the broker wrote to /tmp inside the
+  container and the kafka-data volume was unused: data survived `docker compose stop/start` but not
+  `docker compose down`. Also KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0 (default 3000 ms): part of the
+  6 s we measured for B to join the group in A2 was this initial delay; to re-measure with v2.
+- Steps 0-2 measurements were taken with v1; their conclusions (keys, compaction, rebalancing) are unchanged.

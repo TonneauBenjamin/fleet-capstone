@@ -17,15 +17,14 @@ simulator. Everything else (catalog publisher, notifier, Spark jobs, Airflow DAG
     pip install -r requirements.txt           # also gives you `spark-submit` inside the venv
     python3 scripts/create_topics.py          # creates the six topics
     python3 producers/produce_vehicle_events.py --rate 20
+    # options: --hot-vehicle (key skew, Part C.3), --unknown-vehicles (vehicles absent from the catalog)
 
 Stop the simulator with Ctrl+C. `docker compose down` stops the broker (add `-v` to erase its data).
 
 Look at a topic:
 
-    docker exec <kafka-container-name> /opt/kafka/bin/kafka-console-consumer.sh \
+    docker exec capstone-kafka /opt/kafka/bin/kafka-console-consumer.sh \
         --bootstrap-server localhost:9092 --topic vehicle_events --from-beginning --max-messages 5
-
-(Find the container name with `docker ps`.)
 
 ## Topics
 | Topic | Partitions | Role |
@@ -38,8 +37,11 @@ Look at a topic:
 | daily_reports | 1 | daily report published by Airflow |
 
 ## Message formats
-Telemetry (JSON): `event_id`, `vehicle_id`, `event_time` (ISO 8601, UTC), `latitude`,
-`longitude`, `speed_kmh`, `fuel_level_pct`, `harsh_braking`. The 40 vehicles are `V0001` to `V0040`.
+Telemetry (JSON, key = vehicle_id): `event_id`, `vehicle_id`, `event_time` (ISO 8601, UTC),
+`latitude`, `longitude`, `speed_kmh`, `fuel_level_pct`, `harsh_braking`. The 40 vehicles are
+`V0001` to `V0040`. `event_time` always has millisecond precision and an explicit offset, e.g.
+`2026-10-13T09:16:00.123+00:00` (Spark pattern `yyyy-MM-dd'T'HH:mm:ss.SSSXXX`). `event_id` is
+unique per simulator run (it contains a run id), so restarting the simulator creates no false duplicates.
 
 Catalog record (JSON, key = vehicle_id): `vehicle_id`, `plate`, `vehicle_type`, `home_region`,
 `max_payload_kg`. Regions: Paris, Lyon, Marseille, Lille, Toulouse. Types: van, truck,
@@ -47,11 +49,20 @@ refrigerated_truck, motorbike. Weights: 500, 1000, 1500 or 3000 kg. You must gen
 records yourself (the `faker` package is installed if you want plates).
 
 ## What the simulator does on purpose
-About 3% anomalies (speed above 115 km/h, sometimes harsh braking), 1% duplicated messages
-(same `event_id`), 2% late messages (event time 3 to 6 minutes in the past), 1% corrupted
-messages (broken JSON, missing field, impossible value, bad timestamp). With `--hot-vehicle`,
-about 40% of all traffic comes from V0001 (key skew). Do not modify the simulator to hide
-these faults: your platform must handle them.
+* About 3% anomalies: half with a speed above 120 km/h, half with `harsh_braking = true`
+  (both must raise a point alert).
+* Sustained speeding: every few minutes one vehicle drives at 101-118 km/h for 6 to 9 minutes
+  (it must raise a `sustained_speeding` alert in Query 3, without point alerts).
+* 1% duplicated messages (same `event_id`, sent right after the original).
+* 2% late messages (event time 3 to 6 minutes in the past).
+* 1% corrupted messages: broken JSON, missing field (`vehicle_id`, `event_time` or `speed_kmh`),
+  impossible speed (-12 or 999), unparsable timestamp.
+* With `--hot-vehicle`, about 40% of all traffic comes from V0001 (key skew).
+* With `--unknown-vehicles`, about 1% of traffic comes from V0041-V0045, which are not in the
+  catalog (they must get the region `UNKNOWN`).
+
+Do not modify the simulator to hide these faults: your platform must handle them. At the end
+(Ctrl+C) the simulator prints how many messages were delivered and how many failed.
 
 ## Suggested layout of your own project
     producers/      your catalog publisher
@@ -63,6 +74,8 @@ these faults: your platform must handle them.
 ## Common problems
 * *Cannot connect to localhost:9092*: Docker is not running, or the container is not up yet
   (`docker ps`, wait 15 seconds after `docker compose up -d`).
+* *Broker restarted, data gone*: the data lives in the `kafka-data` volume; only
+  `docker compose down -v` erases it.
 * *Port 9092 already used*: stop the other Kafka, or change the port in both listener settings.
 * *Spark cannot find the Kafka source*: add
   `--packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1` to `spark-submit`.
