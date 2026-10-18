@@ -32,3 +32,29 @@
 - Poison message: an alert with valid JSON but no alert_type used to crash the notifier BEFORE the commit,
   so every restart re-read it and crashed again (one bad message blocks its partition forever).
   Fix: alert_type read inside the try with a default; unreadable alerts are logged, committed and skipped.
+
+## A3 - Keys and partition counts (counts fixed by the provided create_topics.py; justified here)
+Rule used: partitions >= max(throughput needed / throughput of one reader, number of parallel readers wanted),
+and never more than the number of distinct keys. Can be increased later but never decreased, and increasing
+changes hash(key) mod N, so a key moves to another partition and per-key order breaks -> chosen up front.
+
+| Topic | Partitions | Key | Justification |
+|---|---|---|---|
+| vehicle_events | 6 | vehicle_id | Highest volume (20 ev/s, x10 in E4). 6 = up to 6 parallel Spark read tasks; divisible by 2 and 3 (even split for 2 or 3 readers). Key keeps each vehicle's events ordered in one partition. |
+| fleet_catalog | 3 | vehicle_id | Compaction needs a key (latest card per vehicle). 40 records, read once: 1 would suffice, 3 is harmless. |
+| alerts | 3 | vehicle_id | Up to 3 notifier instances (A2 needs 2). Same key = an alert and its duplicate land in the same partition -> same instance -> in-memory dedup works. |
+| region_kpis_1min | 3 | region | Successive updates of a region's window stay ordered. Limit: 6 keys (5 regions + UNKNOWN) on 3 partitions -> uneven; more than 6 partitions would be useless. |
+| vehicle_events_dlq | 3 | original key | ~1% of traffic; key lets us trace a rejected message back to its vehicle. 1 would suffice. |
+| daily_reports | 1 | date | One message per day; a single partition gives total order of the reports. |
+
+- "3" for small topics is also the usual production convention (3 brokers -> one partition leader per broker).
+  Honest limit: our setup has ONE broker, so this argument does not apply locally.
+- Measured cost of keying by vehicle (Step 0): uneven partitions even without hot vehicle (578 vs 1219 messages:
+  40 keys hashed over 6 partitions = 4/5/7/8/8/8 vehicles); with --hot-vehicle partition 2 got 50.1% of traffic
+  (expected 0.40 + 0.60 x 8/40 = 52%), 8x partition 1.
+- Random key on vehicle_events: per-vehicle order lost (a vehicle's events spread over 6 partitions) for any consumer
+  that processes a vehicle sequentially. Spark event-time windows are NOT affected (they use event_time + watermark,
+  not arrival order). Benefit: the hot-vehicle skew disappears. Same mistake on `alerts` would break our dedup
+  (an alert and its duplicate could reach different notifier instances); on fleet_catalog, compaction is impossible.
+- One partition: one Spark read task and one active consumer per group (extra instances stay idle as standbys),
+  throughput limited to one partition on one broker; gain = total order across all vehicles.
