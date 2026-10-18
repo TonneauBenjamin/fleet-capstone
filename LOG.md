@@ -9,3 +9,4 @@
 | 2026-10-13 | Benjamin | 2 | Test alert sender + alert format (docs/schemas.md) | none |
 | 2026-10-13 | Benjamin | 2 | Notifier, 2 instances: cooperative 2-round rebalance; clean stop handover < 1 s; kill -9 handover 48 s, resumed at committed offset, no loss | Ctrl+C killed `tee` → BrokenPipeError inside consumer.close() → log() helper + `tee -i` |
 | 2026-10-13 | Benjamin | 2 | Review: alert without alert_type crashed the notifier before commit → poison message blocking a partition | alert_type read inside the try with a default |
+| 2026-10-18 | Benjamin | A3 | Keys and partition counts justified (REPORT_NOTES A3), using Step 0 measurements | none |
