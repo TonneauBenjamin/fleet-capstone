@@ -72,3 +72,44 @@ changes hash(key) mod N, so a key moves to another partition and per-key order b
   `docker compose down`. Also KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0 (default 3000 ms): part of the
   6 s we measured for B to join the group in A2 was this initial delay; to re-measure with v2.
 - Steps 0-2 measurements were taken with v1; their conclusions (keys, compaction, rebalancing) are unchanged.
+\n
+## A4 - Delivery semantics per hop
+| Hop | Semantics | Why |
+|---|---|---|
+| producer -> broker | no duplicate from retries (exactly-once per write, per producer session) | enable.idempotence=true: PID + per-partition sequence numbers, acks=all. The simulator's INJECTED duplicates are two separate writes, so both are stored -> handled by Spark (B2). Messages still in a producer's local buffer are lost if the process is killed (-9); v2 simulator flushes on Ctrl+C/SIGTERM. |
+| broker -> Spark | no loss, no double processing of state | Spark writes the offsets of batch N to checkpoint/offsets BEFORE running it and to commits/ after; it does not use Kafka consumer-group commits. After a crash the batch is re-read from the same offsets (Kafka still has them). |
+| Spark -> Parquet | effectively exactly-once | dynamic partition overwrite of event_date=*/batch_id=<id>: a replay replaces its own folders (tested). |
+| Spark -> alerts / DLQ (Kafka sink) | at-least-once | Kafka only appends: a replayed batch publishes its messages again. alert_id is deterministic (<event_id>:<type>), so copies are recognisable. |
+| alerts -> notifier | at-least-once | commit after handling; a crash between print and commit re-delivers; dedup on alert_id (per instance, in memory). |
+End to end for alerts: at-least-once, duplicates mostly filtered by the notifier.
+
+## B1-B4 - Spark streaming application (spark_jobs/streaming_app.py)
+Tested without Kafka (tests/test_spark_logic_local.py, output raw_outputs/b_local_test.txt): messages from the
+real v2 simulator functions streamed through the SAME functions as the real job. Real run on Kafka: see raw_outputs.
+- B1: explicit StructType; event_time read as string then to_timestamp with yyyy-MM-dd'T'HH:mm:ss.SSSXXX.
+  One `reason` column (checks in order: broken_json, missing_field:<name>, bad_timestamp, speed_out_of_range);
+  routing on reason IS NULL / IS NOT NULL (never NULL itself) -> no message can fall between the two outputs.
+  DLQ value = JSON {reason, raw_value, source_partition, source_offset, source_timestamp, detected_at}, key = original key.
+  Test: 2111 messages in = DLQ + valid exactly; DLQ reasons = injected faults (17 bad_timestamp, 9 broken_json,
+  10 speed_out_of_range, 9 missing_field).
+- B2: withWatermark(event_time, 2 min).dropDuplicatesWithinWatermark(event_id). State bounded: an id is evicted once
+  the watermark (max event_time seen - 2 min) has passed it. A duplicate arriving after that carries the same old
+  event_time, so it is older than the watermark and is dropped as late data (not written, not counted as a duplicate).
+  Side effect: the simulator's late events (3-6 min) are dropped too -> no Parquet row, no alert for them.
+  Test: 49/49 late events of batch 2 dropped; the 30 late events of batch 1 were KEPT, because the first micro-batch
+  has no watermark yet (it is computed at the end of each batch). Spark metric numRowsDroppedByWatermark said 98 for
+  those 49 rows -> we count late rows by comparing sent vs stored, not with this metric.
+  Spark also runs empty "no-data" batches to advance the watermark and evict state -> gaps in batch_id folders.
+- B3: catalog read ONCE at start (batch Kafka read earliest->latest), latest record per vehicle_id = max_by(value,
+  offset) (compaction does not guarantee old versions are gone, A1); tombstone as latest = vehicle removed.
+  Cached + broadcast LEFT join; region = coalesce(home_region, 'UNKNOWN').
+  Test: V0002 updated Lyon->Toulouse -> Toulouse; V0003 tombstoned -> UNKNOWN; V0041-V0045 -> UNKNOWN.
+  Limitation: catalog changes published while the job runs are invisible until restart (we chose a cached snapshot;
+  re-reading every micro-batch would cost a Kafka read per batch).
+- B4: foreachBatch: persist (used twice) -> Parquet partitioned by event_date (UTC) and batch_id with mode overwrite +
+  spark.sql.sources.partitionOverwriteMode=dynamic -> point alerts (speed > 120 -> speeding, harsh_braking ->
+  harsh_braking; both if both) to `alerts`, key = vehicle_id. Trigger 10 s.
+  Test: replaying the last batch (same batch_id, 478 rows) left the row count unchanged (1946); the same rows under a
+  new batch_id were added (2424) -> it is the batch_id that makes the write idempotent. 53 dangerous events -> 53 alerts,
+  unique alert_ids. Alerts are NOT idempotent (Kafka append): replay = alerts published twice, same alert_id.
+- Session config: spark.sql.session.timeZone=UTC (event_date = UTC day, like Airflow), shuffle.partitions=6.
