@@ -1,5 +1,0 @@
-
-GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
-alerts-notifier alerts          1          94              95              1               -               -               -
-alerts-notifier alerts          2          111             115             4               -               -               -
-alerts-notifier alerts          0          118             120             2               -               -               -
