@@ -1,9 +1,5 @@
-.venv/
-.DS_Store
-__MACOSX/
-checkpoints/
 data/
-*.log
+.DS_Store
 __pycache__/
 *.pyc
-sample.txt
+*.pyo

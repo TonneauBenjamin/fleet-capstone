@@ -8,12 +8,11 @@ Capstone Project -- create every Kafka topic used by the pipeline.
   vehicle_events_dlq  3 partitions   malformed events routed by Spark (dead-letter queue)
   daily_reports       1 partition    daily summaries published by Airflow
 """
-import time
+import os
 
-from confluent_kafka import KafkaException
 from confluent_kafka.admin import AdminClient, NewTopic
 
-BOOTSTRAP_SERVERS = "localhost:9092"
+BOOTSTRAP_SERVERS = os.environ.get("BOOTSTRAP_SERVERS", "localhost:9092")
 
 TOPICS = [
     NewTopic("vehicle_events", num_partitions=6, replication_factor=1),
@@ -28,15 +27,7 @@ TOPICS = [
 
 def main():
     admin = AdminClient({"bootstrap.servers": BOOTSTRAP_SERVERS})
-    for attempt in range(1, 7):  # the broker may still be starting after `docker compose up -d`
-        try:
-            existing = set(admin.list_topics(timeout=10).topics)
-            break
-        except KafkaException as exc:
-            if attempt == 6:
-                raise SystemExit(f"cannot reach Kafka at {BOOTSTRAP_SERVERS}: {exc}")
-            print(f"broker not ready ({exc}), retrying in 5 s...")
-            time.sleep(5)
+    existing = set(admin.list_topics(timeout=10).topics)
     to_create = [t for t in TOPICS if t.topic not in existing]
     if not to_create:
         print("all topics already exist")
