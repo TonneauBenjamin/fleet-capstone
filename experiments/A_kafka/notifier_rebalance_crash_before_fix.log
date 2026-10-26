@@ -1,0 +1,67 @@
+﻿== before kill 2026-10-13T11:54:29Z
+
+[notifier1] assigned [0, 2] -> partitions now [0, 2]
+
+
+
+[notifier2] assigned [1] -> partitions now [1]
+
+
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          2          -               0               -               rdkafka-02e95c73-a49b-4cbf-ac62-cfe0128af543 /172.18.0.6     rdkafka
+alerts-notifier alerts          0          -               0               -               rdkafka-02e95c73-a49b-4cbf-ac62-cfe0128af543 /172.18.0.6     rdkafka
+alerts-notifier alerts          1          -               0               -               rdkafka-6309f927-2136-4831-bfef-56d94b018d77 /172.18.0.4     rdkafka
+== docker kill notifier2 at 2026-10-13T11:54:32Z
+== after kill (+50 s) 2026-10-13T11:55:34Z
+
+2026-10-13T11:53:33.668207419Z [notifier1] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T11:55:15.755548805Z [notifier1] assigned [1] -> partitions now [0, 1, 2]
+
+
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          1          18              18              0               rdkafka-02e95c73-a49b-4cbf-ac62-cfe0128af543 /172.18.0.6     rdkafka
+alerts-notifier alerts          2          26              26              0               rdkafka-02e95c73-a49b-4cbf-ac62-cfe0128af543 /172.18.0.6     rdkafka
+alerts-notifier alerts          0          19              19              0               rdkafka-02e95c73-a49b-4cbf-ac62-cfe0128af543 /172.18.0.6     rdkafka
+== docker start notifier2 at 2026-10-13T11:55:45Z
+== after restart
+
+2026-10-13T11:53:33.668207419Z [notifier1] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T11:55:15.755548805Z [notifier1] assigned [1] -> partitions now [0, 1, 2]
+2026-10-13T11:55:45.780325552Z [notifier1] revoked [0] -> partitions now [1, 2]
+2026-10-13T11:55:45.780563558Z [notifier1] assigned [] -> partitions now [1, 2]
+2026-10-13T11:55:48.790134442Z [notifier1] revoked [1, 2] -> partitions now []
+2026-10-13T11:55:48.798633176Z Traceback (most recent call last):
+2026-10-13T11:55:48.803949245Z     main()
+2026-10-13T11:55:48.809277055Z     consumer.commit(message=msg, asynchronous=False)
+2026-10-13T11:55:48.809316296Z cimpl.KafkaException: KafkaError{code=ILLEGAL_GENERATION,val=22,str="Commit failed: 
+Broker: Specified group generation id is not valid"}
+
+
+
+2026-10-13T11:53:33.668323496Z [notifier2] assigned [1] -> partitions now [1]
+2026-10-13T11:55:45.780264645Z [notifier2] assigned [] -> partitions now []
+2026-10-13T11:55:50.289582529Z [notifier2] assigned [0, 1, 2] -> partitions now [0, 1, 2]
+
+
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          1          26              26              0               rdkafka-f3b178ac-b0c6-4e71-b2dd-e96a5eed1387 /172.18.0.4     rdkafka
+alerts-notifier alerts          2          37              37              0               rdkafka-f3b178ac-b0c6-4e71-b2dd-e96a5eed1387 /172.18.0.4     rdkafka
+alerts-notifier alerts          0          24              24              0               rdkafka-f3b178ac-b0c6-4e71-b2dd-e96a5eed1387 /172.18.0.4     rdkafka
+
+2026-10-13T11:53:33.668207419Z [notifier1] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T11:55:15.755548805Z [notifier1] assigned [1] -> partitions now [0, 1, 2]
+2026-10-13T11:55:45.780325552Z [notifier1] revoked [0] -> partitions now [1, 2]
+2026-10-13T11:55:45.780563558Z [notifier1] assigned [] -> partitions now [1, 2]
+2026-10-13T11:55:48.790134442Z [notifier1] revoked [1, 2] -> partitions now []
+2026-10-13T11:55:48.798633176Z Traceback (most recent call last):
+2026-10-13T11:55:48.798656750Z   File "/app/consumers/alerts_notifier.py", line 51, in <module>
+2026-10-13T11:55:48.803949245Z     main()
+2026-10-13T11:55:48.803991856Z   File "/app/consumers/alerts_notifier.py", line 45, in main
+2026-10-13T11:55:48.809277055Z     consumer.commit(message=msg, asynchronous=False)
+2026-10-13T11:55:48.809316296Z cimpl.KafkaException: KafkaError{code=ILLEGAL_GENERATION,val=22,str="Commit failed: 
+Broker: Specified group generation id is not valid"}
+
+

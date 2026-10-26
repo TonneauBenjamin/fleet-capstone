@@ -1,0 +1,32 @@
+﻿== 1. before, 2026-10-13T11:58:33Z
+2026-10-13T11:58:06.827330248Z [notifier1] assigned [1] -> partitions now [1]
+2026-10-13T11:58:06.826806567Z [notifier2] assigned [0, 2] -> partitions now [0, 2]
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          2          62              62              0               rdkafka-0a05fee8-7f60-48e1-8d88-d60a35bbc0f5 /172.18.0.4     rdkafka
+alerts-notifier alerts          0          52              52              0               rdkafka-0a05fee8-7f60-48e1-8d88-d60a35bbc0f5 /172.18.0.4     rdkafka
+alerts-notifier alerts          1          63              63              0               rdkafka-f8262c97-f10f-43ad-8719-7f858c353571 /172.18.0.6     rdkafka
+== 2. docker kill notifier2 at 2026-10-13T11:58:36Z
+== 3. after kill, 2026-10-13T11:59:33Z
+2026-10-13T11:58:06.827330248Z [notifier1] assigned [1] -> partitions now [1]
+2026-10-13T11:59:18.873054575Z [notifier1] assigned [2, 0] -> partitions now [0, 1, 2]
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          1          74              74              0               rdkafka-f8262c97-f10f-43ad-8719-7f858c353571 /172.18.0.6     rdkafka
+alerts-notifier alerts          2          74              74              0               rdkafka-f8262c97-f10f-43ad-8719-7f858c353571 /172.18.0.6     rdkafka
+alerts-notifier alerts          0          69              69              0               rdkafka-f8262c97-f10f-43ad-8719-7f858c353571 /172.18.0.6     rdkafka
+== 4. docker start notifier2 at 2026-10-13T11:59:36Z
+== 5. after restart, 2026-10-13T12:00:13Z
+2026-10-13T11:58:06.827330248Z [notifier1] assigned [1] -> partitions now [1]
+2026-10-13T11:59:18.873054575Z [notifier1] assigned [2, 0] -> partitions now [0, 1, 2]
+2026-10-13T11:59:36.892076287Z [notifier1] revoked [0] -> partitions now [1, 2]
+2026-10-13T11:59:36.892456866Z [notifier1] assigned [] -> partitions now [1, 2]
+2026-10-13T11:59:39.900684999Z [notifier1] assigned [] -> partitions now [1, 2]
+2026-10-13T11:58:06.826806567Z [notifier2] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T11:59:36.891979027Z [notifier2] assigned [] -> partitions now []
+2026-10-13T11:59:39.900643943Z [notifier2] assigned [0] -> partitions now [0]
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          1          84              84              0               rdkafka-f8262c97-f10f-43ad-8719-7f858c353571 /172.18.0.6     rdkafka
+alerts-notifier alerts          2          80              80              0               rdkafka-f8262c97-f10f-43ad-8719-7f858c353571 /172.18.0.6     rdkafka
+alerts-notifier alerts          0          74              74              0               rdkafka-82335da6-3611-48b8-8dac-acdfc389e421 /172.18.0.4     rdkafka

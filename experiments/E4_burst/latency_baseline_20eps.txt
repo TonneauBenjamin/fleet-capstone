@@ -1,0 +1,1 @@
+﻿80 alerts, latency median 13.66 s, p95 18.71 s, max 19.44 s

@@ -1,0 +1,28 @@
+﻿2026-10-13T11:53:26.668289400Z streaming ~20 events/s (hot vehicle: False). Ctrl+C to stop.
+2026-10-13T12:23:59.758323910Z streaming ~20 events/s (hot vehicle: False). Ctrl+C to stop.
+docker : 2026-10-13T12:24:30.195841812Z %6|1791894270.194|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: 
+kafka:29092/1: Disconnected (after 30437ms in state UP)
+Au caractère Ligne:1 : 463
++ ... treaming | Out-Null; docker logs -t capstone-simulator-1 2>&1 | Out-F ...
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-10-13T12:2...ms in state UP):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-10-13T12:24:30.761263315Z %3|1791894270.761|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 0ms in state CONNECT)
+2026-10-13T12:24:30.955591492Z %3|1791894270.955|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 0ms in state CONNECT, 1 identical error(s) 
+suppressed)
+2026-10-13T12:24:39.799332236Z %3|1791894279.799|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Failed to resolve 'kafka:29092': Temporary failure in name resolution (after 8003ms in state CONNECT)
+2026-10-13T12:24:43.923979469Z %3|1791894283.923|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Failed to resolve 'kafka:29092': Name or service not known (after 3124ms in state CONNECT)
+2026-10-13T12:25:00.786067083Z %3|1791894300.785|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Failed to resolve 'kafka:29092': Temporary failure in name resolution (after 8002ms in state CONNECT)
+2026-10-13T12:25:05.909453313Z %3|1791894305.909|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Failed to resolve 'kafka:29092': Name or service not known (after 3126ms in state CONNECT)
+2026-10-13T12:25:19.918495648Z %3|1791894319.918|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Failed to resolve 'kafka:29092': Name or service not known (after 7135ms in state CONNECT, 1 identical error(s) 
+suppressed)
+2026-10-13T12:25:36.785656830Z %3|1791894336.785|FAIL|rdkafka#producer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: 
+Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 4003ms in state CONNECT)

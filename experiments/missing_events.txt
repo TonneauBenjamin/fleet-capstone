@@ -1,0 +1,4 @@
+﻿valid events up to 13:31 UTC: 1014369 missing and not late: 203
+by minute (kafka ts): [('2026-10-13 12:36', 101), ('2026-10-13 12:46', 101), ('2026-10-13 12:35', 1)]
+of them, event_id present in the Parquet with another event_time: 203
+gap to that other event (s): min 9 median 147 max 251

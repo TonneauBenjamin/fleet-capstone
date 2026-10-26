@@ -1,0 +1,9 @@
+﻿== docker kill spark-streaming at 2026-10-13T12:19:33Z
+dlq : last offsets 1220, last commit 1219
+q1_events : last offsets 188, last commit 187
+q2_region_kpis : last offsets 489, last commit 488
+q3_sustained : last offsets 480, last commit 479
+last parquet batch folder: 187
+== docker start spark-streaming at 2026-10-13T12:20:25Z
+== simulator stopped for the check at 2026-10-13T12:22:03Z
+== simulator restarted at 2026-10-13T12:23:59Z

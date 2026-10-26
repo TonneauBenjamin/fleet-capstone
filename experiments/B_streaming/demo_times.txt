@@ -1,0 +1,3 @@
+﻿scenario + tombstone V0040 started at 2026-10-13T12:00:56Z
+tombstone sent at 2026-10-13T12:00:59Z
+catalog republished (V0040 back) at 2026-10-13T12:04:04Z

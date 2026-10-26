@@ -9,6 +9,10 @@ DATA_DIR = os.environ.get("DATA_DIR", "data")
 EVENTS_PATH = f"{DATA_DIR}/events"
 CHECKPOINTS = f"{DATA_DIR}/checkpoints"
 
+# only used for the performance study (not set = Spark defaults)
+TRIGGER_SECONDS = os.environ.get("TRIGGER_SECONDS")
+MAX_OFFSETS_PER_TRIGGER = os.environ.get("MAX_OFFSETS_PER_TRIGGER")
+
 EVENT_FIELDS = ["event_id", "vehicle_id", "event_time", "latitude", "longitude",
                 "speed_kmh", "fuel_level_pct", "harsh_braking"]
 
@@ -39,24 +43,32 @@ spark = (SparkSession.builder
 spark.sparkContext.setLogLevel("WARN")
 
 
+def with_trigger(writer):
+    if TRIGGER_SECONDS:
+        return writer.trigger(processingTime=f"{TRIGGER_SECONDS} seconds")
+    return writer
+
+
 def kafka_sink(df, topic, checkpoint, mode, name):
-    return (df.writeStream
-            .queryName(name)
-            .format("kafka")
-            .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS)
-            .option("topic", topic)
-            .option("checkpointLocation", f"{CHECKPOINTS}/{checkpoint}")
-            .outputMode(mode)
-            .start())
+    writer = (df.writeStream
+              .queryName(name)
+              .format("kafka")
+              .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS)
+              .option("topic", topic)
+              .option("checkpointLocation", f"{CHECKPOINTS}/{checkpoint}")
+              .outputMode(mode))
+    return with_trigger(writer).start()
 
 
 # ---------- 1. parsing + validation ----------
-raw = (spark.readStream
-       .format("kafka")
-       .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS)
-       .option("subscribe", "vehicle_events")
-       .option("startingOffsets", "earliest")
-       .load())
+reader = (spark.readStream
+          .format("kafka")
+          .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS)
+          .option("subscribe", "vehicle_events")
+          .option("startingOffsets", "earliest"))
+if MAX_OFFSETS_PER_TRIGGER:
+    reader = reader.option("maxOffsetsPerTrigger", MAX_OFFSETS_PER_TRIGGER)
+raw = reader.load()
 
 parsed = (raw.select(F.col("key").cast("string").alias("key"),
                      F.col("value").cast("string").alias("raw"))
@@ -172,11 +184,10 @@ sustained_out = sustained.select(
 # ---------- start the four queries ----------
 kafka_sink(dlq, "vehicle_events_dlq", "dlq", "append", "dlq")
 
-(enriched.writeStream
- .queryName("q1_events")
- .foreachBatch(write_events_and_alerts)
- .option("checkpointLocation", f"{CHECKPOINTS}/q1_events")
- .start())
+with_trigger(enriched.writeStream
+             .queryName("q1_events")
+             .foreachBatch(write_events_and_alerts)
+             .option("checkpointLocation", f"{CHECKPOINTS}/q1_events")).start()
 
 kafka_sink(region_kpis_out, "region_kpis_1min", "q2_region_kpis", "update", "q2_region_kpis")
 kafka_sink(sustained_out, "alerts", "q3_sustained", "update", "q3_sustained")

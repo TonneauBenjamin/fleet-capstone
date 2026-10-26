@@ -1,0 +1,10 @@
+﻿== simulator stopped at 2026-10-13T13:32:38Z, check after the streaming job drained
+vehicle_events: 1035521 messages, 10240 invalid, 1015205 distinct valid events
+parquet: 995037 rows, 995007 distinct events, 30 duplicated rows
+missing from parquet: 20198 (19995 of them were sent > 2 min late)
+batches holding the duplicates: [0, 100]
+point alerts: 26844 published, 26844 distinct, 0 duplicates
+events that should have raised a point alert: 26844, without alert: 0
+alerts by type: {'speeding': 23886, 'harsh_braking': 2958, 'consumer_lag_high': 2, 'sustained_speeding': 183, 'data_quality_failed': 1}
+dlq: 10240 messages for 10240 invalid inputs -> 0 extra
+== done 2026-10-13T13:36:21Z

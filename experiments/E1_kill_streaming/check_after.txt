@@ -1,0 +1,9 @@
+ Container capstone-simulator-run-6aa5cd304eb5 Creating 
+ Container capstone-simulator-run-6aa5cd304eb5 Created 
+vehicle_events: 35135 messages, 353 invalid, 34470 distinct valid events
+parquet: 33806 rows, 33806 distinct events, 0 duplicated rows
+missing from parquet: 664 (664 of them were sent > 2 min late)
+point alerts: 937 published, 937 distinct, 0 duplicates
+events that should have raised a point alert: 937, without alert: 0
+alerts by type: {'speeding': 837, 'harsh_braking': 100, 'consumer_lag_high': 2, 'sustained_speeding': 182}
+dlq: 353 messages for 353 invalid inputs -> 0 extra

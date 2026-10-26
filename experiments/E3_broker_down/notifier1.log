@@ -1,0 +1,25 @@
+﻿2026-10-13T11:58:06.827330248Z [notifier1] assigned [1] -> partitions now [1]
+2026-10-13T11:59:18.873054575Z [notifier1] assigned [2, 0] -> partitions now [0, 1, 2]
+2026-10-13T11:59:36.892076287Z [notifier1] revoked [0] -> partitions now [1, 2]
+2026-10-13T11:59:36.892456866Z [notifier1] assigned [] -> partitions now [1, 2]
+2026-10-13T11:59:39.900684999Z [notifier1] assigned [] -> partitions now [1, 2]
+2026-10-13T12:15:05.549656676Z [notifier1] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T12:24:30.195043796Z %6|1791894270.194|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Disconnected (after 567697ms in state UP)
+2026-10-13T12:25:14.985327594Z [notifier1] revoked [0, 2] -> partitions now []
+2026-10-13T12:26:27.107020700Z [notifier1] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T12:24:30.196363720Z %6|1791894270.195|FAIL|rdkafka#consumer-1| [thrd:GroupCoordinator]: GroupCoordinator: kafka:29092: Disconnected (after 567696ms in state UP)
+2026-10-13T12:24:30.197182933Z %3|1791894270.196|FAIL|rdkafka#consumer-1| [thrd:GroupCoordinator]: GroupCoordinator: kafka:29092: Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 0ms in state CONNECT)
+2026-10-13T12:24:30.197683393Z %3|1791894270.197|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 1ms in state CONNECT)
+2026-10-13T12:24:30.389274572Z %3|1791894270.388|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 0ms in state CONNECT, 1 identical error(s) suppressed)
+2026-10-13T12:24:30.454577060Z %3|1791894270.454|FAIL|rdkafka#consumer-1| [thrd:GroupCoordinator]: GroupCoordinator: kafka:29092: Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 0ms in state CONNECT, 1 identical error(s) suppressed)
+2026-10-13T12:24:42.875190827Z %3|1791894282.874|FAIL|rdkafka#consumer-1| [thrd:GroupCoordinator]: GroupCoordinator: kafka:29092: Failed to resolve 'kafka:29092': Name or service not known (after 7141ms in state CONNECT)
+2026-10-13T12:24:42.875333560Z %4|1791894282.875|METADATA|rdkafka#consumer-1| [thrd:main]: GroupCoordinator/1: Metadata request failed: broker down: Local: Host resolution failure (0ms): Permanent
+2026-10-13T12:25:01.070012163Z %3|1791894301.069|FAIL|rdkafka#consumer-1| [thrd:GroupCoordinator]: GroupCoordinator: kafka:29092: Failed to resolve 'kafka:29092': Name or service not known (after 7196ms in state CONNECT, 2 identical error(s) suppressed)
+2026-10-13T12:25:01.838025342Z %4|1791894301.837|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Connection setup timed out in state CONNECT (after 30031ms in state CONNECT)
+2026-10-13T12:25:05.097167450Z %3|1791894305.096|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Failed to resolve 'kafka:29092': Name or service not known (after 3120ms in state CONNECT)
+2026-10-13T12:25:09.608631473Z %3|1791894309.608|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Failed to resolve 'kafka:29092': Name or service not known (after 3128ms in state CONNECT, 1 identical error(s) suppressed)
+2026-10-13T12:25:14.985282548Z %4|1791894314.984|SESSTMOUT|rdkafka#consumer-1| [thrd:main]: Consumer group session timed out (in join-state steady) after 45033 ms without a successful response from the group coordinator (broker 1, last error was Success): revoking assignment and rejoining group
+2026-10-13T12:25:36.944802278Z %3|1791894336.944|FAIL|rdkafka#consumer-1| [thrd:GroupCoordinator]: GroupCoordinator: kafka:29092: Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 4002ms in state CONNECT)
+2026-10-13T12:25:39.845401581Z %3|1791894339.844|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Failed to resolve 'kafka:29092': Temporary failure in name resolution (after 8001ms in state CONNECT)
+2026-10-13T12:25:40.852241259Z %3|1791894340.851|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 1ms in state CONNECT)
+2026-10-13T12:25:41.005395949Z %3|1791894341.004|FAIL|rdkafka#consumer-1| [thrd:kafka:29092/bootstrap]: kafka:29092/1: Connect to ipv4#172.18.0.2:29092 failed: Connection refused (after 0ms in state CONNECT, 1 identical error(s) suppressed)

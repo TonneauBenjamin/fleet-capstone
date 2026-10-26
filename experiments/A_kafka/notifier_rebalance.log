@@ -1,0 +1,36 @@
+﻿== 1. before (final notifier code), 2026-10-13T12:44:33Z
+2026-10-13T12:44:13.445259366Z [notifier1] assigned [1] -> partitions now [1]
+2026-10-13T12:44:13.445486353Z [notifier2] assigned [0, 2] -> partitions now [0, 2]
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          2          1035            1035            0               rdkafka-0db7b934-cfa9-4e46-85b4-e3a656e6f9d1 /172.18.0.6     rdkafka
+alerts-notifier alerts          0          1042            1042            0               rdkafka-0db7b934-cfa9-4e46-85b4-e3a656e6f9d1 /172.18.0.6     rdkafka
+alerts-notifier alerts          1          1114            1114            0               rdkafka-6440900f-9db7-40b7-a3ed-73ade05de9e3 /172.18.0.4     rdkafka
+== 2. docker kill notifier2 at 2026-10-13T12:44:36Z
+== 3. after kill, 2026-10-13T12:45:33Z
+2026-10-13T12:44:13.445259366Z [notifier1] assigned [1] -> partitions now [1]
+2026-10-13T12:45:19.498144196Z [notifier1] assigned [2, 0] -> partitions now [0, 1, 2]
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          1          1126            1126            0               rdkafka-6440900f-9db7-40b7-a3ed-73ade05de9e3 /172.18.0.4     rdkafka
+alerts-notifier alerts          2          1042            1042            0               rdkafka-6440900f-9db7-40b7-a3ed-73ade05de9e3 /172.18.0.4     rdkafka
+alerts-notifier alerts          0          1054            1054            0               rdkafka-6440900f-9db7-40b7-a3ed-73ade05de9e3 /172.18.0.4     rdkafka
+== 4. docker start notifier2 at 2026-10-13T12:45:36Z
+== 5. after restart, 2026-10-13T12:46:10Z
+2026-10-13T12:44:13.445259366Z [notifier1] assigned [1] -> partitions now [1]
+2026-10-13T12:45:19.498144196Z [notifier1] assigned [2, 0] -> partitions now [0, 1, 2]
+2026-10-13T12:45:37.517544977Z [notifier1] revoked [0] -> partitions now [1, 2]
+2026-10-13T12:45:37.518866663Z [notifier1] assigned [] -> partitions now [1, 2]
+2026-10-13T12:45:40.523633029Z [notifier1] commit failed: KafkaError{code=ILLEGAL_GENERATION,val=22,str="Commit failed: Broker: Specified group generation id is not valid"}
+2026-10-13T12:45:40.524600730Z [notifier1] commit failed: KafkaError{code=ILLEGAL_GENERATION,val=22,str="Commit failed: Broker: Specified group generation id is not valid"}
+2026-10-13T12:45:40.526661923Z [notifier1] commit failed: KafkaError{code=ILLEGAL_GENERATION,val=22,str="Commit failed: Broker: Specified group generation id is not valid"}
+2026-10-13T12:45:40.526720970Z [notifier1] revoked [1, 2] -> partitions now []
+2026-10-13T12:45:41.524894054Z [notifier1] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T12:44:13.445486353Z [notifier2] assigned [0, 2] -> partitions now [0, 2]
+2026-10-13T12:45:37.517629537Z [notifier2] assigned [] -> partitions now []
+2026-10-13T12:45:41.524499520Z [notifier2] assigned [1] -> partitions now [1]
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+alerts-notifier alerts          2          1049            1049            0               rdkafka-6440900f-9db7-40b7-a3ed-73ade05de9e3 /172.18.0.4     rdkafka
+alerts-notifier alerts          0          1066            1066            0               rdkafka-6440900f-9db7-40b7-a3ed-73ade05de9e3 /172.18.0.4     rdkafka
+alerts-notifier alerts          1          1133            1133            0               rdkafka-99f91d84-8014-439c-a046-a057300072d2 /172.18.0.6     rdkafka

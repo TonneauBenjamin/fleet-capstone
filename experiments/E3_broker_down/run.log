@@ -1,0 +1,12 @@
+﻿== docker stop capstone-kafka at 2026-10-13T12:24:29Z
+== stopped at 2026-10-13T12:24:31Z
+notifier1 Up 10 minutes
+notifier2 Up 10 minutes
+airflow Up 31 minutes
+spark-streaming Up 4 minutes
+capstone-simulator-1 Up About a minute
+capstone-init-1 Exited (0) About a minute ago
+capstone-kafka Exited (143) 36 seconds ago
+oracle-xe Exited (255) 5 weeks ago
+== docker start capstone-kafka at 2026-10-13T12:25:36Z
+== spark-streaming exited at 2026-10-13T12:25:31Z (StreamingQueryException in query dlq: Kafka TimeoutException 60000 ms), restarted by hand at 2026-10-13T12:27:05Z

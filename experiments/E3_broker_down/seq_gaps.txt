@@ -1,0 +1,4 @@
+﻿## all messages of the simulator run that crossed the outage (12:23:00 -> 12:33 UTC)
+10362 messages, seq 1 -> 10280, missing seq: 0 []
+## only messages created while the broker was down (12:24:31 -> 12:25:36 UTC)
+1305 messages, seq 641 -> 1940, missing seq: 0 []

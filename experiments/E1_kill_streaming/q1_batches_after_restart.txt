@@ -1,0 +1,13 @@
+ Container capstone-simulator-run-c0e4bc0ea919 Creating 
+ Container capstone-simulator-run-c0e4bc0ea919 Created 
+batch  duration_s  records
+  184        7.30      140
+  185        7.00      140
+  186        6.91      143
+  187        7.13      164
+  188      106.11      140
+  189       12.09     2164
+  190       12.94      243
+  191        9.55      281
+99 batches, 17886 records in 887 s -> 20 records/s
+batch duration: mean 8.56 s, max 106.11 s

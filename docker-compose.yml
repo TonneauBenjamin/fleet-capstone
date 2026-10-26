@@ -2,6 +2,7 @@
 services:
   kafka:
     image: apache/kafka:3.8.0
+    container_name: capstone-kafka
     ports:
       - "9092:9092"
     environment:
@@ -50,6 +51,7 @@ services:
 
   notifier1:
     image: capstone-app
+    container_name: notifier1
     environment:
       BOOTSTRAP_SERVERS: kafka:29092
       NOTIFIER_NAME: notifier1
@@ -62,6 +64,7 @@ services:
 
   notifier2:
     image: capstone-app
+    container_name: notifier2
     environment:
       BOOTSTRAP_SERVERS: kafka:29092
       NOTIFIER_NAME: notifier2
@@ -74,6 +77,7 @@ services:
 
   spark-streaming:
     image: capstone-app
+    container_name: spark-streaming
     ports:
       - "4040:4040"
     environment:
@@ -83,6 +87,27 @@ services:
       - .:/app
       - ivy-cache:/root/.ivy2
     command: spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1 --conf spark.sql.shuffle.partitions=6 spark_jobs/streaming_job.py
+    depends_on:
+      init:
+        condition: service_completed_successfully
+
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    image: capstone-airflow
+    container_name: airflow
+    user: root
+    ports:
+      - "8080:8080"
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      BOOTSTRAP_SERVERS: kafka:29092
+      DATA_DIR: /app/data
+    volumes:
+      - ./airflow_dags:/opt/airflow/dags
+      - .:/app
+    command: standalone
     depends_on:
       init:
         condition: service_completed_successfully

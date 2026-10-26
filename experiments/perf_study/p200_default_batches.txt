@@ -1,0 +1,6 @@
+﻿batch  duration_s  records
+    0      466.74    99997
+    1      425.81    99997
+    2      419.96    99998
+3 batches, 299992 records in 1314 s -> 228 records/s
+batch duration: mean 437.50 s, max 466.74 s

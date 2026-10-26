@@ -1,0 +1,12 @@
+﻿== main spark-streaming stopped at 2026-10-17T21:04:47Z
+== p6_default (shuffle.partitions=6, trigger='', maxOffsetsPerTrigger=100000) started at 2026-10-17T21:04:48Z
+   caught up at 2026-10-17T21:08:00Z
+   finished at 2026-10-17T21:11:44Z
+== p6_10s (shuffle.partitions=6, trigger='10', maxOffsetsPerTrigger=100000) started at 2026-10-17T21:11:44Z
+   caught up at 2026-10-17T21:14:35Z
+   finished at 2026-10-17T21:18:17Z
+== p200_default (shuffle.partitions=200, trigger='', maxOffsetsPerTrigger=100000) started at 2026-10-17T21:18:17Z
+   caught up at 2026-10-17T21:43:36Z
+   finished at 2026-10-17T21:47:05Z
+== p200_10s (shuffle.partitions=200, trigger='10', maxOffsetsPerTrigger=100000) started at 2026-10-17T21:47:05Z
+== run p200_10s cancelled (see results.md), main spark-streaming restarted at 2026-10-17T21:47:13Z

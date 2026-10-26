@@ -1,0 +1,30 @@
+﻿== simulator stopped at 2026-10-13T13:27:04Z (data of 2026-10-13 frozen)
+== clear run_quality (run 1) at 2026-10-13T13:27:48Z
+   state: success at 2026-10-13T13:29:43Z
+   sha256 of data/quality/2026-10-13.json: AC6C5A198D6BEB60818A611B96451987414C80A160D418AFFC8B0491B1B3E544
+{
+  "date": "2026-10-13",
+  "passed": true,
+  "reasons": [],
+  "rows": 993799,
+  "duplicated_event_ids": 7100,
+  "duplicate_pct": 0.71,
+  "unknown_pct": 0.01
+}
+== clear run_quality (run 2) at 2026-10-13T13:29:43Z
+   state: success at 2026-10-13T13:31:38Z
+   sha256 of data/quality/2026-10-13.json: AC6C5A198D6BEB60818A611B96451987414C80A160D418AFFC8B0491B1B3E544
+{
+  "date": "2026-10-13",
+  "passed": true,
+  "reasons": [],
+  "rows": 993799,
+  "duplicated_event_ids": 7100,
+  "duplicate_pct": 0.71,
+  "unknown_pct": 0.01
+}
+== simulator restarted at 2026-10-13T13:31:40Z
+== done
+attempt=1.log
+attempt=2.log
+attempt=3.log

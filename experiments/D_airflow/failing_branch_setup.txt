@@ -1,0 +1,1 @@
+﻿fake day 2026-10-11 = one copied Parquet file (part-00000-54379f48-c17d-4cd1-bbd8-63d1629694d8.c000.snappy.parquet) to test the failing branch

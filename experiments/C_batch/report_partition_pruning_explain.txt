@@ -1,0 +1,3 @@
+﻿[2026-10-13T13:19:01.460+0000] {subprocess.py:93} INFO - == Physical Plan ==
+[2026-10-13T13:19:01.461+0000] {subprocess.py:93} INFO - *(1) ColumnarToRow
+[2026-10-13T13:19:01.461+0000] {subprocess.py:93} INFO - +- FileScan parquet [vehicle_id#0,event_id#1,event_time#2-T120000ms,latitude#3,longitude#4,speed_kmh#5,fuel_level_pct#6,harsh_braking#7,plate#8,vehicle_type#9,home_region#10,max_payload_kg#11,region#12,event_date#13,batch_id#14] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/app/data/events], PartitionFilters: [isnotnull(event_date#13), (event_date#13 = 2026-10-13)], PushedFilters: [], ReadSchema: struct<vehicle_id:string,event_id:string,event_time:timestamp,latitude:double,longitude:double,sp...
